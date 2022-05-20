@@ -19,6 +19,7 @@
 		8AE97E532836788D00594312 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8AE97E552836788D00594312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AE97E582836788D00594312 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8AEC20F228376BF40043EA64 /* NewlyCoinedDB */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NewlyCoinedDB; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +37,7 @@
 			isa = PBXGroup;
 			children = (
 				8AE97E502836788D00594312 /* NewlyCoinedSwiftUI */,
+				8AEC20F228376BF40043EA64 /* NewlyCoinedDB */,
 				8AE97E4F2836788D00594312 /* Products */,
 			);
 			sourceTree = "<group>";
