@@ -27,7 +27,47 @@ final class CSVParserTests: XCTestCase {
     let _ = CSVParser()
   }
 
-  
+  func testParser_whenLoadBundlePath_makeDataOrError() {
+    // Given
 
+    // When
+    do {
+      let _ = try sut.parseBundle("")
+      // Then
+      XCTAssert(true)
+    } catch let error {
+      XCTAssert(true, error.localizedDescription)
+    }
+  }
 
+  func testParser_whenValidBundlePath_makeData() {
+
+    // Given
+    guard let mockCSVURL = Bundle.module.path(forResource: "NewlyCoinedWords", ofType: "csv") else {
+      XCTAssert(false, "Bundle not found!")
+      return
+    }
+    // When
+
+    do {
+      let _ = try sut.parseBundle(mockCSVURL)
+      // Then
+      XCTAssert(true)
+    } catch let error {
+      XCTAssert(false, error.localizedDescription)
+    }
+  }
+
+  func testParser_whenInvalidBundlePath_throwError() {
+    // Given
+    let invaliePath = ""
+    // When
+    do {
+      let _ = try sut.parseBundle(invaliePath)
+      XCTAssert(false, "get error")
+    } catch {
+      XCTAssert(true)
+    }
+    // Then
+  }
 }

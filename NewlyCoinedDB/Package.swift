@@ -25,6 +25,7 @@ let package = Package(
             resources: [.process("NewlyCoinedWords.csv")]),
         .testTarget(
             name: "NewlyCoinedDBTests",
-            dependencies: ["NewlyCoinedDB"]),
+            dependencies: ["NewlyCoinedDB"],
+            resources: [.process("Mock/NewlyCoinedWords.csv")])
     ]
 )
