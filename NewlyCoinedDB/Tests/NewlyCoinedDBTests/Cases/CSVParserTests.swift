@@ -91,16 +91,20 @@ final class CSVParserTests: XCTestCase {
     }
   }
 
-//  func testParser_whenInputBudnle_resultIsString2dArray() {
-//    // Given
-//    let validPath = validPath()
-//    do {
-//      let parsedData = try sut.parseBundle(validPath)
-//    }
-//    // When
-//
-//    // Then
-//  }
-
-
+  func testParser_whenInputBudnle_resultIsString2dArray() {
+    // Given
+    let validPath = validPath()
+    do {
+      // When
+      let parsedData = try sut.parseBundle(validPath)
+      // Then
+      if parsedData is [[String]] {
+        XCTAssert(true)
+      } else {
+        XCTAssert(false, "parsedData mush [[String]]type")
+      }
+    } catch let error {
+      XCTAssert(false, error.localizedDescription)
+    }
+  }
 }

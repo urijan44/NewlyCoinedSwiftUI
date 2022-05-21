@@ -31,6 +31,16 @@ final class CSVParser {
     return separatorComma(string)
   }
 
+  func parseBundle(_ bundlePath: String) throws -> [[String]] {
+    do {
+      let data = try fetchBundleData(bundlePath)
+      let convertedData = try parseData(data)
+      return convertedData
+    } catch let error {
+      throw error
+    }
+  }
+
   private func separatorComma(_ plainCsv: String) -> [[String]] {
     plainCsv.components(separatedBy: "\r\n").map{$0.components(separatedBy: ",")}.filter { !$0.isEmpty }
   }
