@@ -21,4 +21,17 @@ final class CSVParser {
       throw error
     }
   }
+
+  func parseData(_ data: Data) throws -> [[String]] {
+
+    guard let string = String(data: data, encoding: .utf8) else {
+      throw NSError(domain: "invalid encoding type, converter encoding type is utf8", code: -1)
+    }
+
+    return separatorComma(string)
+  }
+
+  private func separatorComma(_ plainCsv: String) -> [[String]] {
+    plainCsv.components(separatedBy: "\r\n").map{$0.components(separatedBy: ",")}.filter { !$0.isEmpty }
+  }
 }
