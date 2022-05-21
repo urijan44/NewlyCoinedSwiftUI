@@ -39,7 +39,7 @@ final class CSVParserTests: XCTestCase {
 
     // When
     do {
-      let _ = try sut.parseBundle("")
+      let _ = try sut.fetchBundleData("")
       // Then
       XCTAssert(true)
     } catch let error {
@@ -54,7 +54,7 @@ final class CSVParserTests: XCTestCase {
     // When
 
     do {
-      let _ = try sut.parseBundle(mockCSVURL)
+      let _ = try sut.fetchBundleData(mockCSVURL)
       // Then
       XCTAssert(true)
     } catch let error {
@@ -67,7 +67,7 @@ final class CSVParserTests: XCTestCase {
     let invaliePath = ""
     // When
     do {
-      let _ = try sut.parseBundle(invaliePath)
+      let _ = try sut.fetchBundleData(invaliePath)
       XCTAssert(false, "get error")
     } catch let error {
       print(error)
@@ -82,7 +82,7 @@ final class CSVParserTests: XCTestCase {
 
     do {
       // When
-      let data = try sut.parseBundle(validPath)
+      let data = try sut.fetchBundleData(validPath)
       let parsedData = try sut.parseData(data)
       XCTAssert(parsedData is [[String]])
       // Then
@@ -90,6 +90,17 @@ final class CSVParserTests: XCTestCase {
       XCTAssert(false, error.localizedDescription)
     }
   }
+
+//  func testParser_whenInputBudnle_resultIsString2dArray() {
+//    // Given
+//    let validPath = validPath()
+//    do {
+//      let parsedData = try sut.parseBundle(validPath)
+//    }
+//    // When
+//
+//    // Then
+//  }
 
 
 }

@@ -10,7 +10,7 @@ import Foundation
 final class CSVParser {
   init() {}
 
-  func parseBundle(_ bundlePath: String) throws -> Data {
+  func fetchBundleData(_ bundlePath: String) throws -> Data {
 
     let url = URL(fileURLWithPath: bundlePath)
 
