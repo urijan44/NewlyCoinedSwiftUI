@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum ParsingError: Error {
+public enum ParsingError: Error {
   case invalidBundlePath
   case parsingError
 }
 
-protocol NewlyCoinedRepositoryInterface {
+public protocol NewlyCoinedRepositoryInterface {
   func fetchCSVStrings() -> Result<[[String]], ParsingError>
 }
 
-final class NewlyCoinedRepository: NewlyCoinedRepositoryInterface {
+final public class NewlyCoinedRepository: NewlyCoinedRepositoryInterface {
   //MARK: - Properties
   private let parser: CSVParserInterface
   private let bundlePath: String = {
@@ -30,7 +30,7 @@ final class NewlyCoinedRepository: NewlyCoinedRepositoryInterface {
     self.parser = parser
   }
 
-  func fetchCSVStrings() -> Result<[[String]], ParsingError> {
+  public func fetchCSVStrings() -> Result<[[String]], ParsingError> {
     do {
       let searchResultPath = try searchBundlePath()
       let parseResult = try parser.parseBundle(searchResultPath)
