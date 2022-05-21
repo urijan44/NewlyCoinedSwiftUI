@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class CSVParser {
+protocol CSVParserInterface {
+  func parseBundle(_ bundlePath: String) throws -> [[String]]
+}
+
+final class CSVParser: CSVParserInterface {
   init() {}
 
   func fetchBundleData(_ bundlePath: String) throws -> Data {
