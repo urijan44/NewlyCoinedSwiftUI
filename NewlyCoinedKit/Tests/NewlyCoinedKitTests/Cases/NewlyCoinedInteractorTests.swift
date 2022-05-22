@@ -60,4 +60,22 @@ final class NewlyCoinedInteractorTests: XCTestCase {
     .store(in: &subscriptions)
     wait(for: [exp], timeout: 0.1)
   }
+
+  func testInteractor_whenFetchWordsFailure_ReceivedAPIError() {
+    // Given
+    let exp = expectation(description: "fetch words")
+    repository.suceess = false
+    // When
+    let result = sut.fetchWords()
+    result.sink { completionWithError in
+      // Then
+      guard case .failure = completionWithError else { return }
+      exp.fulfill()
+      XCTAssert(true)
+    } receiveValue: { _ in
+      XCTAssert(false)
+    }
+    .store(in: &subscriptions)
+    wait(for: [exp], timeout: 0.1)
+  }
 }

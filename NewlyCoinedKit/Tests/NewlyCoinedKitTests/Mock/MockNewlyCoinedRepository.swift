@@ -11,14 +11,21 @@ import NewlyCoinedDB
 final class MockNewlyCoinedRepository: NewlyCoinedRepositoryInterface {
 
   var handler: (() -> Void)?
-
+  var suceess: Bool = true
   init() {}
 
   func fetchCSVStrings() -> Result<[[String]], ParsingError> {
     handler?()
-    return .success([
-      ["주불", "주소불러"],
-      ["억까", "억지로 까내리다"]
-    ])
+
+    if suceess {
+      return .success([
+        ["주불", "주소불러"],
+        ["억까", "억지로 까내리다"]
+      ])
+    } else {
+      return .failure(.parsingError)
+    }
+
+
   }
 }
