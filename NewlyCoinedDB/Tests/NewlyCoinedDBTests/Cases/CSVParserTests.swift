@@ -30,6 +30,13 @@ final class CSVParserTests: XCTestCase {
     return mockCSVURL
   }
 
+  func invalidData() -> String {
+    guard let mockCSVURL = Bundle.module.path(forResource: "NewlyCoinedWordsInvalidEncoding", ofType: "csv") else {
+      fatalError()
+    }
+    return mockCSVURL
+  }
+
   func test_parserInit_exsit() {
     let _ = CSVParser()
   }
@@ -76,6 +83,20 @@ final class CSVParserTests: XCTestCase {
     // Then
   }
 
+  func testParserBundle_whenInvalidBundlePath_throwError() {
+    // Given
+    let invalidPath = ""
+    // When
+    do {
+      let _ = try sut.parseBundle(invalidPath)
+      // Then
+      XCTAssert(false, "get error")
+    } catch let error {
+      print(error)
+      XCTAssertEqual(!error.localizedDescription.isEmpty, true)
+    }
+  }
+
   func testParser_whenParsedData_resultIsString2dArray() {
     // Given
     let validPath = validPath()
@@ -84,10 +105,29 @@ final class CSVParserTests: XCTestCase {
       // When
       let data = try sut.fetchBundleData(validPath)
       let parsedData = try sut.parseData(data)
-      XCTAssert(parsedData is [[String]])
+      if let firstResult = parsedData.first,
+         firstResult.count == 2,
+         firstResult[0] == "주불", firstResult[1] == "주소 불러의 줄임말"
+      {
+        XCTAssert(true)
+      }
       // Then
     } catch let error {
       XCTAssert(false, error.localizedDescription)
+    }
+  }
+
+  func testParser_whenInvalidEncodingData_throwError() {
+    // Given
+    let invalidData = invalidData()
+    // When
+    do {
+      let data = try sut.fetchBundleData(invalidData)
+      let _ = try sut.parseData(data)
+      // Then
+      XCTAssert(false)
+    } catch let error as NSError {
+      XCTAssert(error.domain == "invalid encoding type, converter encoding type is utf8")
     }
   }
 
@@ -98,7 +138,10 @@ final class CSVParserTests: XCTestCase {
       // When
       let parsedData = try sut.parseBundle(validPath)
       // Then
-      if parsedData is [[String]] {
+      if let firstResult = parsedData.first,
+         firstResult.count == 2,
+         firstResult[0] == "주불", firstResult[1] == "주소 불러의 줄임말"
+      {
         XCTAssert(true)
       } else {
         XCTAssert(false, "parsedData mush [[String]]type")

@@ -22,10 +22,15 @@ let package = Package(
         .target(
             name: "NewlyCoinedDB",
             dependencies: [],
-            resources: [.process("NewlyCoinedWords.csv")]),
+            resources: [
+              .process("NewlyCoinedWords.csv")]),
         .testTarget(
             name: "NewlyCoinedDBTests",
             dependencies: ["NewlyCoinedDB"],
-            resources: [.process("Mock/NewlyCoinedWords.csv")])
+            resources: [
+              .process("Mock/NewlyCoinedWords.csv"),
+              .process("Mock/NewlyCoinedWordsInvalidEncoding.csv")
+
+            ])
     ]
 )

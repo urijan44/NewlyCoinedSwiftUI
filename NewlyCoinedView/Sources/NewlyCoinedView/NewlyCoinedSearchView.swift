@@ -24,13 +24,7 @@ public struct NewlyCoinedSearchView: View {
   }
 
   public var body: some View {
-    ZStack {
-      NewlyCoinedSearchField(
-        recomendWords: $viewModel.recomendWords,
-        searchText: $viewModel.searchText) { commitWord in
-          viewModel.searchWord()
-        }
-        .zIndex(0)
+    ZStack(alignment: .top) {
       Rectangle()
         .foregroundColor(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -39,6 +33,14 @@ public struct NewlyCoinedSearchView: View {
         }
         .zIndex(-1)
       VStack {
+        NewlyCoinedSearchField(
+          recomendWords: $viewModel.recomendWords,
+          searchText: $viewModel.searchText) { commitWord in
+            viewModel.searchWord()
+          }
+          .frame(height: 100)
+          .padding(.vertical, 16)
+
         if isShowingDisplay {
           NewlyCoinedSearchDisplay(meaning: $viewModel.wordMeaning)
             .frame(height: UIScreen.main.bounds.height / 2)
@@ -46,8 +48,8 @@ public struct NewlyCoinedSearchView: View {
             .transition(.move(edge: .bottom).animation(.easeIn(duration: 1)))
         }
       }
-      .zIndex(1)
     }
+
     .onReceive(keyboardHeightPublisher) { isShowing in
       withAnimation {
         isShowingDisplay = isShowing
