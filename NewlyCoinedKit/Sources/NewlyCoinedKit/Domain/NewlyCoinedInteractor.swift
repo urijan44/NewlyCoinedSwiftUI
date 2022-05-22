@@ -9,7 +9,11 @@ import Foundation
 import Combine
 import NewlyCoinedDB
 
-final class NewlyCoinedInteractor {
+protocol NewlyCoinedInteractorInterface {
+  func fetchWords() -> AnyPublisher<NewlyWordsDictionary, APIError>
+}
+
+final class NewlyCoinedInteractor: NewlyCoinedInteractorInterface {
 
   //MARK: - Properties
   private let repository: NewlyCoinedRepositoryInterface
@@ -26,7 +30,7 @@ final class NewlyCoinedInteractor {
     switch result {
       case .success(let words):
         let mapping = NewlyWordsDictionary(words: convertToDictionary(words))
-        
+
         return Just(mapping)
           .setFailureType(to: APIError.self)
           .eraseToAnyPublisher()
