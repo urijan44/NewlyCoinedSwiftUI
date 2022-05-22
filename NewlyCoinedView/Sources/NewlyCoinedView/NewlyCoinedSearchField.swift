@@ -9,8 +9,10 @@ import SwiftUI
 
 struct NewlyCoinedSearchField: View {
 
-  @State var imageSize: CGSize = .zero
-  @State var text = ""
+  @State private var imageSize: CGSize = .zero
+  @Binding var recomendWords: [String]
+  @Binding var searchText: String
+  var action: (String) -> Void
 
   var body: some View {
     VStack {
@@ -23,12 +25,14 @@ struct NewlyCoinedSearchField: View {
     GeometryReader { proxy in
       VStack {
         HStack(spacing: 0) {
-          TextField("신조어를 입력하세요", text: .constant("삼귀자"))
+          TextField("신조어를 입력하세요", text: $searchText) {
+            action(searchText)
+          }
             .textFieldStyle(NewlyCoinedTextFieldStyle())
             .anchorPreference(key: ViewSizePreferenceKey.self, value: .bounds) { anchor in
               ViewSize(id: "TextField", anchor: anchor)
             }
-          searchButton
+          searchButton(seachText: searchText)
             .frame(height: imageSize.height)
         }
 
@@ -36,23 +40,23 @@ struct NewlyCoinedSearchField: View {
           guard let value = value else { return }
           imageSize = proxy[value.anchor].size
         }
-        NewlyCoinedSearchRecomendTag(tags: .constant(["윰차", "실매", "만만잘부", "꾸안꾸"])) { keyword in
-          print(keyword)
+        NewlyCoinedSearchRecomendTag(tags: $recomendWords) { selectedTag in
+          searchText = selectedTag
         }
       }
     }
   }
 
-  var searchButton: some View {
+  @ViewBuilder func searchButton(seachText: String) -> some View {
     SearchButton {
-      text = "search!!"
+      action(searchText)
     }
   }
-}
 
-struct NewlyCoinedSearchField_Previews: PreviewProvider {
-  static var previews: some View {
-    NewlyCoinedSearchField()
+  init(recomendWords: Binding<[String]>, searchText: Binding<String>, action: @escaping (String) -> Void) {
+    self._recomendWords = recomendWords
+    self._searchText = searchText
+    self.action = action
   }
 }
 

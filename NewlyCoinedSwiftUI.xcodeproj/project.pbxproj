@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A88F720283A51EC008EE6C5 /* NewlyCoinedDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8A88F71F283A51EC008EE6C5 /* NewlyCoinedDB */; };
+		8A88F722283A51EC008EE6C5 /* NewlyCoinedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8A88F721283A51EC008EE6C5 /* NewlyCoinedKit */; };
+		8A88F724283A51EC008EE6C5 /* NewlyCoinedView in Frameworks */ = {isa = PBXBuildFile; productRef = 8A88F723283A51EC008EE6C5 /* NewlyCoinedView */; };
 		8AE97E522836788D00594312 /* NewlyCoinedSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE97E512836788D00594312 /* NewlyCoinedSwiftUIApp.swift */; };
 		8AE97E542836788D00594312 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE97E532836788D00594312 /* ContentView.swift */; };
 		8AE97E562836788D00594312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AE97E552836788D00594312 /* Assets.xcassets */; };
@@ -29,12 +32,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A88F720283A51EC008EE6C5 /* NewlyCoinedDB in Frameworks */,
+				8A88F722283A51EC008EE6C5 /* NewlyCoinedKit in Frameworks */,
+				8A88F724283A51EC008EE6C5 /* NewlyCoinedView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A88F71E283A51EC008EE6C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8AE97E452836788C00594312 = {
 			isa = PBXGroup;
 			children = (
@@ -43,6 +56,7 @@
 				8AEC20F228376BF40043EA64 /* NewlyCoinedDB */,
 				8AA9892B283934A60004C618 /* NewlyCoinedKit */,
 				8AE97E4F2836788D00594312 /* Products */,
+				8A88F71E283A51EC008EE6C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +103,11 @@
 			dependencies = (
 			);
 			name = NewlyCoinedSwiftUI;
+			packageProductDependencies = (
+				8A88F71F283A51EC008EE6C5 /* NewlyCoinedDB */,
+				8A88F721283A51EC008EE6C5 /* NewlyCoinedKit */,
+				8A88F723283A51EC008EE6C5 /* NewlyCoinedView */,
+			);
 			productName = NewlyCoinedSwiftUI;
 			productReference = 8AE97E4E2836788D00594312 /* NewlyCoinedSwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -345,6 +364,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8A88F71F283A51EC008EE6C5 /* NewlyCoinedDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NewlyCoinedDB;
+		};
+		8A88F721283A51EC008EE6C5 /* NewlyCoinedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NewlyCoinedKit;
+		};
+		8A88F723283A51EC008EE6C5 /* NewlyCoinedView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NewlyCoinedView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8AE97E462836788C00594312 /* Project object */;
 }

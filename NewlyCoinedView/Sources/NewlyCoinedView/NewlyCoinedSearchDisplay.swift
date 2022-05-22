@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewlyCoinedSearchDisplay: View {
+  @Binding var meaning: String
   var body: some View {
     VStack(spacing: 0) {
       ZStack(alignment: .leading) {
@@ -23,7 +24,7 @@ struct NewlyCoinedSearchDisplay: View {
       }
       .frame(height: 20)
       ZStack {
-        Text("안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요")
+        Text(meaning)
           .font(.title2)
         Rectangle()
           .stroke(lineWidth: 1)
@@ -51,6 +52,6 @@ struct NewlyCoinedSearchDisplay: View {
 
 struct NewlyCoinedSearchDisplay_Previews: PreviewProvider {
   static var previews: some View {
-    NewlyCoinedSearchDisplay()
+    NewlyCoinedSearchDisplay(meaning: .constant("뿌에에에엥"))
   }
 }
