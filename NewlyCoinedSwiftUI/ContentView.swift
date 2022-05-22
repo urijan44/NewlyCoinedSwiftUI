@@ -10,7 +10,7 @@ import NewlyCoinedView
 
 struct ContentView: View {
     var body: some View {
-      NewlyCoinedSearchView()
+      NewlyCoinedSearchView(viewModel: .init())
     }
 }
 

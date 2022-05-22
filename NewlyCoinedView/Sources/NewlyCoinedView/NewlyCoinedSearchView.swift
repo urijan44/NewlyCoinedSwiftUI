@@ -9,8 +9,7 @@ import SwiftUI
 import Combine
 
 public struct NewlyCoinedSearchView: View {
-
-  @State var searchText: String = ""
+  @ObservedObject var viewModel: ViewModel
   @State var isShowingDisplay = true
 
   private var keyboardHeightPublisher: AnyPublisher<Bool, Never> {
@@ -27,8 +26,8 @@ public struct NewlyCoinedSearchView: View {
   public var body: some View {
     ZStack {
       NewlyCoinedSearchField(
-        recomendWords: .constant(["윰차","실매","만만잘부","꾸안꾸"]),
-        searchText: $searchText) { commitWord in
+        recomendWords: $viewModel.recomendWords,
+        searchText: $viewModel.searchText) { commitWord in
           print(commitWord)
         }
         .zIndex(0)
@@ -41,7 +40,7 @@ public struct NewlyCoinedSearchView: View {
         .zIndex(-1)
       VStack {
         if isShowingDisplay {
-          NewlyCoinedSearchDisplay(meaning: .constant("뿌에엥"))
+          NewlyCoinedSearchDisplay(meaning: $viewModel.wordMeaning)
             .frame(height: UIScreen.main.bounds.height / 2)
             .padding(.horizontal)
             .transition(.move(edge: .bottom).animation(.easeIn(duration: 1)))
@@ -56,16 +55,14 @@ public struct NewlyCoinedSearchView: View {
     }
   }
 
-  public init() {
-
+  public init(viewModel: ViewModel) {
+    self.viewModel = viewModel
   }
-
-
 } 
 
 struct NewlyCoinedSearchView_Previews: PreviewProvider {
   static var previews: some View {
-    NewlyCoinedSearchView()
+    NewlyCoinedSearchView(viewModel: .init())
   }
 }
 
