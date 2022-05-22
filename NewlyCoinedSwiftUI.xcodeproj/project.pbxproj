@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A88F71D283A3BA4008EE6C5 /* NewlyCoinedView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NewlyCoinedView; sourceTree = "<group>"; };
 		8AA9892B283934A60004C618 /* NewlyCoinedKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NewlyCoinedKit; sourceTree = "<group>"; };
 		8AE97E4E2836788D00594312 /* NewlyCoinedSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewlyCoinedSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AE97E512836788D00594312 /* NewlyCoinedSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewlyCoinedSwiftUIApp.swift; sourceTree = "<group>"; };
@@ -38,6 +39,7 @@
 			isa = PBXGroup;
 			children = (
 				8AE97E502836788D00594312 /* NewlyCoinedSwiftUI */,
+				8A88F71D283A3BA4008EE6C5 /* NewlyCoinedView */,
 				8AEC20F228376BF40043EA64 /* NewlyCoinedDB */,
 				8AA9892B283934A60004C618 /* NewlyCoinedKit */,
 				8AE97E4F2836788D00594312 /* Products */,
