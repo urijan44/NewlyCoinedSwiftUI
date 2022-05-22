@@ -21,18 +21,24 @@ struct NewlyCoinedSearchField: View {
 
   var searchField: some View {
     GeometryReader { proxy in
-      HStack(spacing: 0) {
-        TextField("신조어를 입력하세요", text: .constant("삼귀자"))
-          .textFieldStyle(NewlyCoinedTextFieldStyle())
-          .anchorPreference(key: ViewSizePreferenceKey.self, value: .bounds) { anchor in
-            ViewSize(id: "TextField", anchor: anchor)
-          }
+      VStack {
+        HStack(spacing: 0) {
+          TextField("신조어를 입력하세요", text: .constant("삼귀자"))
+            .textFieldStyle(NewlyCoinedTextFieldStyle())
+            .anchorPreference(key: ViewSizePreferenceKey.self, value: .bounds) { anchor in
+              ViewSize(id: "TextField", anchor: anchor)
+            }
           searchButton
-          .frame(height: imageSize.height)
-      }
-      .onPreferenceChange(ViewSizePreferenceKey.self) { value in
-        guard let value = value else { return }
-        imageSize = proxy[value.anchor].size
+            .frame(height: imageSize.height)
+        }
+
+        .onPreferenceChange(ViewSizePreferenceKey.self) { value in
+          guard let value = value else { return }
+          imageSize = proxy[value.anchor].size
+        }
+        NewlyCoinedSearchRecomendTag(tags: .constant(["윰차", "실매", "만만잘부", "꾸안꾸"])) { keyword in
+          print(keyword)
+        }
       }
     }
   }
