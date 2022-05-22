@@ -8,7 +8,7 @@
 import Foundation
 
 typealias NewlyWord = [String: String]
-struct NewlyWordsDictionary {
+public struct NewlyWordsDictionary {
   let words: [String: String]
 
   func findWord(word: String) -> String? {
@@ -16,12 +16,8 @@ struct NewlyWordsDictionary {
   }
 
   func randomKeywords() -> [String] {
-    var randomwords: [String] = []
-
-    for _ in 1...4 {
-      randomwords.append(words.values.randomElement() ?? "")
-    }
-    return randomwords
+    let random = words.keys.shuffled()
+    return (0...3).map { (random[safe: $0] ?? "") }
   }
 
   init(words: NewlyWord) {

@@ -26,7 +26,7 @@ final public class NewlyCoinedRepository: NewlyCoinedRepositoryInterface {
     return mockCSVURL
   }()
   //MARK: - Methods
-  init(parser: CSVParserInterface) {
+  public init(parser: CSVParserInterface) {
     self.parser = parser
   }
 

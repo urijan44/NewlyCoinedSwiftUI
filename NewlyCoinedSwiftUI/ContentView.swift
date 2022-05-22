@@ -6,16 +6,27 @@
 //
 
 import SwiftUI
+import NewlyCoinedKit
 import NewlyCoinedView
+import NewlyCoinedDB
 
 struct ContentView: View {
-    var body: some View {
-      NewlyCoinedSearchView(viewModel: .init())
-    }
+  var body: some View {
+    makeNewlyCoinedSearchView()
+  }
+
+  @ViewBuilder
+  func makeNewlyCoinedSearchView() -> some View {
+    let parser = CSVParser()
+    let repository = NewlyCoinedRepository(parser: parser)
+    let interactor = NewlyCoinedInteractor(repository: repository)
+    let viewModel = NewlyCoinedSearchView.ViewModel(interactor: interactor)
+    NewlyCoinedSearchView(viewModel: viewModel)
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum APIError: Error {
+public enum APIError: Error {
   case fetchFailure
 }
 
 extension APIError: LocalizedError {
-  var errorDescription: String? {
+  public var errorDescription: String? {
     switch self {
       case .fetchFailure:
         return "신조어를 불러오는 데 실패했습니다"

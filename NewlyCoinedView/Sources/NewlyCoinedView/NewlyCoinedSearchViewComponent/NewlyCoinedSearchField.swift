@@ -35,7 +35,6 @@ struct NewlyCoinedSearchField: View {
           searchButton(seachText: searchText)
             .frame(height: imageSize.height)
         }
-
         .onPreferenceChange(ViewSizePreferenceKey.self) { value in
           guard let value = value else { return }
           imageSize = proxy[value.anchor].size

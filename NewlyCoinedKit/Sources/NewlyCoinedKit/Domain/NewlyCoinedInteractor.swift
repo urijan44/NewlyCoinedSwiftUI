@@ -9,12 +9,12 @@ import Foundation
 import Combine
 import NewlyCoinedDB
 
-protocol NewlyCoinedInteractorInterface {
+public protocol NewlyCoinedInteractorInterface {
   func fetchWords() -> AnyPublisher<NewlyWordsDictionary, APIError>
   func searchWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never>
 }
 
-final class NewlyCoinedInteractor {
+final public class NewlyCoinedInteractor {
 
   //MARK: - Properties
   private let repository: NewlyCoinedRepositoryInterface
@@ -22,14 +22,13 @@ final class NewlyCoinedInteractor {
   private var newlyWords: NewlyWordsDictionary = .init(words: [:])
 
   //MARK: - Methods
-  init(repository: NewlyCoinedRepositoryInterface) {
+  public init(repository: NewlyCoinedRepositoryInterface) {
     self.repository = repository
   }
 
   private func convertToDictionary(_ parsedCsv: [[String]]) -> NewlyWord {
     var dictionary: [String: String] = [:]
     parsedCsv
-      .filter { $0.count == 2}
       .forEach {
         guard let key = $0[safe: 0], let value = $0[safe: 1] else { return }
         dictionary.updateValue(value, forKey: key)
@@ -40,7 +39,7 @@ final class NewlyCoinedInteractor {
 
 extension NewlyCoinedInteractor: NewlyCoinedInteractorInterface {
 
-  func fetchWords() -> AnyPublisher<NewlyWordsDictionary, APIError> {
+  public func fetchWords() -> AnyPublisher<NewlyWordsDictionary, APIError> {
     let result = repository.fetchCSVStrings()
 
     switch result {
@@ -56,7 +55,7 @@ extension NewlyCoinedInteractor: NewlyCoinedInteractorInterface {
     }
   }
 
-  func searchWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never> {
+  public func searchWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never> {
     let word = request.searchWord
     let randomKeyword = newlyWords.randomKeywords()
     let resultMeaning = newlyWords.findWord(word: word) ?? "검색 결과가 없습니다."

@@ -28,7 +28,7 @@ public struct NewlyCoinedSearchView: View {
       NewlyCoinedSearchField(
         recomendWords: $viewModel.recomendWords,
         searchText: $viewModel.searchText) { commitWord in
-          print(commitWord)
+          viewModel.searchWord()
         }
         .zIndex(0)
       Rectangle()
@@ -57,12 +57,6 @@ public struct NewlyCoinedSearchView: View {
 
   public init(viewModel: ViewModel) {
     self.viewModel = viewModel
-  }
-} 
-
-struct NewlyCoinedSearchView_Previews: PreviewProvider {
-  static var previews: some View {
-    NewlyCoinedSearchView(viewModel: .init())
   }
 }
 

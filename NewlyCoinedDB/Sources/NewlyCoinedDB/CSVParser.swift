@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol CSVParserInterface {
+public protocol CSVParserInterface {
   func parseBundle(_ bundlePath: String) throws -> [[String]]
 }
 
-final class CSVParser: CSVParserInterface {
-  init() {}
+final public class CSVParser: CSVParserInterface {
+  public init() {}
 
   func fetchBundleData(_ bundlePath: String) throws -> Data {
 
@@ -35,7 +35,7 @@ final class CSVParser: CSVParserInterface {
     return separatorComma(string)
   }
 
-  func parseBundle(_ bundlePath: String) throws -> [[String]] {
+  public func parseBundle(_ bundlePath: String) throws -> [[String]] {
     do {
       let data = try fetchBundleData(bundlePath)
       let convertedData = try parseData(data)
