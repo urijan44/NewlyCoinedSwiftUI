@@ -46,6 +46,7 @@ final public class CSVParser: CSVParserInterface {
   }
 
   private func separatorComma(_ plainCsv: String) -> [[String]] {
-    plainCsv.components(separatedBy: "\r\n").map{$0.components(separatedBy: ",")}.filter { !$0.isEmpty }
+    let replacedLineCharacter = plainCsv.replacingOccurrences(of: "\r\n", with: "\n")
+    return replacedLineCharacter.components(separatedBy: "\n").map{$0.components(separatedBy: ",")}.filter { $0.count == 2 }
   }
 }
