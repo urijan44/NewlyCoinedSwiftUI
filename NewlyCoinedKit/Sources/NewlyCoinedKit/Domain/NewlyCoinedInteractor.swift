@@ -12,6 +12,7 @@ import NewlyCoinedDB
 public protocol NewlyCoinedInteractorInterface {
   func fetchWords() -> AnyPublisher<NewlyWordsDictionary, APIError>
   func searchWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never>
+  func recomandWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never>
 }
 
 final public class NewlyCoinedInteractor {
@@ -58,7 +59,15 @@ extension NewlyCoinedInteractor: NewlyCoinedInteractorInterface {
   public func searchWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never> {
     let word = request.searchWord
     let randomKeyword = newlyWords.randomKeywords()
-    let resultMeaning = newlyWords.findWord(word: word) ?? "검색 결과가 없습니다."
+    let resultMeaning = newlyWords.findWord(word: word) ?? ""
+    let response = NewlyCoinedMessage.Response(resultMeaning: resultMeaning, randomKeyword: randomKeyword)
+    return Just(response)
+      .eraseToAnyPublisher()
+  }
+  
+    public func recomandWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never> {
+    let randomKeyword = newlyWords.randomKeywords()
+        let resultMeaning = "\(request.searchWord)를 찾을 수 없습니다.\n\(randomKeyword.first ?? "")의 뜻은 무엇일까요?"
     let response = NewlyCoinedMessage.Response(resultMeaning: resultMeaning, randomKeyword: randomKeyword)
     return Just(response)
       .eraseToAnyPublisher()

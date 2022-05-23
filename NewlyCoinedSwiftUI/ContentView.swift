@@ -20,7 +20,8 @@ struct ContentView: View {
     let parser = CSVParser()
     let repository = NewlyCoinedRepository(parser: parser)
     let interactor = NewlyCoinedInteractor(repository: repository)
-    let viewModel = NewlyCoinedSearchView.ViewModel(interactor: interactor)
+    let usecase = NewlyCoinedUseCase(interactor: interactor)
+    let viewModel = NewlyCoinedSearchView.ViewModel(usecase: usecase)
     NewlyCoinedSearchView(viewModel: viewModel)
   }
 }

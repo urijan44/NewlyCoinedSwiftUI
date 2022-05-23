@@ -26,6 +26,7 @@ struct NewlyCoinedSearchDisplay: View {
       ZStack {
         Text(meaning)
           .font(.title2)
+          .padding()
         Rectangle()
           .stroke(lineWidth: 1)
           .overlay(
