@@ -43,7 +43,7 @@ final public class NewlyCoinedRepository: NewlyCoinedRepositoryInterface {
   }
 
   private func searchBundlePath() throws -> String {
-    guard let csvURL = Bundle.module.path(forResource: "NewlyCoinedWords", ofType: "csv") else {
+    guard let csvURL = Bundle.module.path(forResource: "NewlyCoinedWord", ofType: "csv") else {
       throw ParsingError.invalidBundlePath
     }
     return csvURL
