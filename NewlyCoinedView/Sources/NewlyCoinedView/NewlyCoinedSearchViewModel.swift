@@ -17,44 +17,33 @@ extension NewlyCoinedSearchView {
     @Published var recomendWords: [String] = []
     @Published var wordMeaning: String = ""
     private var subscriptions: Set<AnyCancellable> = []
-
+    
     //MARK: - Methods
     public init(usecase: NewlyCoinedUseCaseInterfacoe) {
       self.usecase = usecase
-
+      
       let _ = usecase.fetchWords()
         .sink { completionWithError in
-          guard case .failure(let error) = completionWithError else { return }
-          print(error)
+          guard case .failure = completionWithError else { return }
         } receiveValue: { _ in }
         .store(in: &subscriptions)
-
+      
       searchWord()
-
     }
-
-    public func searchWord() {
-      
-      let request = NewlyCoinedMessage.Request(searchWord: searchText)
-      let subject = PassthroughSubject<NewlyCoinedMessage.Response, Never>()
-      let publisher = usecase.searchWord(request: request)
-        .multicast(subject: subject)
-      
-      subject
-        .map {
-          $0.resultMeaning
-        }
-        .assign(to: \.wordMeaning, on: self)
+    
+    func searchWord() {
+      usecase
+        .searchWord(request: NewlyCoinedMessage.Request(searchWord: searchText))
+        .subscribe(on: DispatchQueue.main)
+        .sink(receiveValue: { [unowned self] response in
+          fetchWordHandling(response)
+        })
         .store(in: &subscriptions)
-
-      subject
-        .map {
-          $0.randomKeyword
-        }
-        .assign(to: \.recomendWords, on: self)
-        .store(in: &subscriptions)
-
-      let _ = publisher.connect()
+    }
+    
+    private func fetchWordHandling(_ response: NewlyCoinedMessage.Response) {
+      wordMeaning = response.resultMeaning
+      recomendWords = response.randomKeyword
     }
   }
 }
