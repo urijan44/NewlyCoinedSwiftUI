@@ -29,7 +29,7 @@ extension NewlyCoinedUseCase: NewlyCoinedUseCaseInterfacoe {
   public func searchWord(request: NewlyCoinedMessage.Request) -> AnyPublisher<NewlyCoinedMessage.Response, Never> {
     let result = interactor.searchWord(request: request)
     return interactor.searchWord(request: request)
-      .flatMap { [unowned self]response -> AnyPublisher<NewlyCoinedMessage.Response, Never> in
+      .flatMap { [unowned self] response -> AnyPublisher<NewlyCoinedMessage.Response, Never> in
         if response.resultMeaning.isEmpty {
           return interactor.recomandWord(request: request).eraseToAnyPublisher()
         } else {
